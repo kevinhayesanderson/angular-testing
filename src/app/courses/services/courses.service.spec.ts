@@ -1,9 +1,9 @@
-import {CoursesService} from './courses.service';
-import {TestBed} from '@angular/core/testing';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {COURSES, findLessonsForCourse} from '../../../../server/db-data';
-import {Course} from '../model/course';
-import {HttpErrorResponse} from '@angular/common/http';
+import { CoursesService } from './courses.service';
+import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { COURSES, findLessonsForCourse } from '../../../../server/db-data';
+import { Course } from '../model/course';
+import { HttpErrorResponse } from '@angular/common/http';
 
 describe('CoursesService', () => {
 
@@ -15,13 +15,12 @@ describe('CoursesService', () => {
   beforeAll(() => {
 
     courseId = 12;
-    changes = {titles: {description: 'Testing Course'}};
+    changes = { titles: { description: 'Testing Course' } };
 
   });
 
   beforeEach(() => {
 
-    console.log('calling beforeEach');
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [CoursesService]
@@ -29,6 +28,10 @@ describe('CoursesService', () => {
     coursesService = TestBed.inject(CoursesService);
     httpTestingController = TestBed.inject(HttpTestingController);
 
+  });
+
+  it('should be created', () => {
+    expect(coursesService).toBeTruthy();
   });
 
   it('should retrieve all courses', () => {
@@ -42,7 +45,7 @@ describe('CoursesService', () => {
 
     const req = httpTestingController.expectOne('/api/courses');
     expect(req.request.method).toEqual('GET');
-    req.flush({payload: Object.values(COURSES)});
+    req.flush({ payload: Object.values(COURSES) });
 
   });
 
@@ -109,7 +112,7 @@ describe('CoursesService', () => {
     expect(testRequest.request.params.get('sortOrder')).toBe('asc');
     expect(testRequest.request.params.get('pageNumber')).toBe('0');
     expect(testRequest.request.params.get('pageSize')).toBe('3');
-    testRequest.flush({payload: findLessonsForCourse(courseId).slice(0, 3)});
+    testRequest.flush({ payload: findLessonsForCourse(courseId).slice(0, 3) });
 
   });
 

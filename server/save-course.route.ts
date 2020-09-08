@@ -1,5 +1,5 @@
-import {Request, Response} from 'express';
-import {findCourseById} from './db-data';
+import { Request, Response } from 'express';
+import { findCourseById } from './db-data';
 
 
 export function saveCourse(req: Request, res: Response) {
